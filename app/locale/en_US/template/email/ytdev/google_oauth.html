@@ -1,0 +1,31 @@
+<!--@subject Your two-factor authentication recovery code @-->
+<!--@vars
+{"store url=\"\"":"Store Url", "var logo_url":"Email Logo Image Url"}
+@-->
+
+<!--@styles
+.highlighted-text{text-align:center;}
+@-->
+
+{{template config_path="design/email/header"}}
+{{inlinecss file="email-inline.css"}}
+
+<table cellpadding="0" cellspacing="0" border="0">
+	<tr>
+		<td class="action-content">
+			<h1>Dear {{var name}},</h1>
+			<p>This is your two-factory authentication recovery code:</p>
+			<p class="highlighted-text">
+				<b>{{var recovery_code}}</b>
+			</p>
+			<p>This code expire in 15 minutes, take care of it during this time.</p>
+			<p>
+				If you have any questions, please feel free to contact us at
+				<a href="mailto:{{var store_email}}">{{var store_email}}</a>
+				{{depend store_phone}} or by phone at <a href="tel:{{var phone}}">{{var store_phone}}</a>{{/depend}}.
+			</p>
+		</td>
+	</tr>
+</table>
+
+{{template config_path="design/email/footer"}}

@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="page-title">
+		<img src="<?php echo $this->getLogoUrl(); ?>" class="store-logo">
+		<h1><?php echo $this->__('Two-Factor Authentication'); ?></h1>
+		<p><?php echo $this->__('Open your authentication app and insert your code here') ?></p>
+	</div>
+	<br>
+	<form action="<?php echo $this->getUrl('google_oauth/index/validate'); ?>" method="post" id="test-form-validate" autocomplete="off">
+		<div class="fieldset">
+			<ul class="form-list">
+				<li>
+					<div class="input-box">
+						<input type="text" name="code" id="code" class="input-box required-entry" placeholder="<?php echo $this->__("Insert 'Authenticator' app code"); ?>">
+					</div>
+				</li>
+				<li>
+					<button type="submit" class="button width-full"><span><span><?php echo $this->__("Validate"); ?></span></span></button>
+				</li>
+				<li>
+					<a href="<?php echo $this->getUrl('google_oauth/index/recovery'); ?>" class="f-left"><?php echo $this->__('Forgot your code? Recovery it now'); ?></a>
+				</li>
+			</ul>
+		</div>
+	</form>
+	<script type="text/javascript">
+		let formValidator	= new VarienForm('test-form-validate');
+	</script>
+</div>

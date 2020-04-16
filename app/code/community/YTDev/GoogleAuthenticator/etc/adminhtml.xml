@@ -1,0 +1,39 @@
+<adminhtml>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <ytdev_google_oauth traslate="title">
+                                        <title>YTDev - Google Authenticator</title>
+                                    </ytdev_google_oauth>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <google_oauth translate="title" module="google_oauth">
+                        <title>YTDev - Google Authenticator Actions</title>
+                        <sort_order>100</sort_order>
+                        <children>
+                            <validate>
+                                <title>Validate action</title>
+                                <sort_order>0</sort_order>
+                            </validate>
+                            <authenticate>
+                                <title>Authenticate action</title>
+                                <sort_order>1</sort_order>
+                            </authenticate>
+                            <recovery>
+                                <title>Recovery action</title>
+                                <sort_order>2</sort_order>
+                            </recovery>
+                        </children>
+                    </google_oauth>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</adminhtml>

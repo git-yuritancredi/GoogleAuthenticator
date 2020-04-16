@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <YTDev_GoogleAuthenticator>
+            <version>1.0</version>
+        </YTDev_GoogleAuthenticator>
+    </modules>
+    <global>
+        <blocks>
+            <google_oauth>
+                <class>YTDev_GoogleAuthenticator_Block</class>
+            </google_oauth>
+
+            <adminhtml>
+                <rewrite>
+                    <system_account_edit_form>YTDev_GoogleAuthenticator_Block_Adminhtml_Account</system_account_edit_form>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+
+        <models>
+            <google_oauth>
+                <class>YTDev_GoogleAuthenticator_Model</class>
+                <resourceModel>google_oauth_resource</resourceModel>
+            </google_oauth>
+
+            <google_oauth_resource>
+                <class>YTDev_GoogleAuthenticator_Model_Resource</class>
+                <entities>
+                    <secrets>
+                        <table>ytdev_google_oauths</table>
+                    </secrets>
+                </entities>
+            </google_oauth_resource>
+
+            <customer>
+                <rewrite>
+                    <customer>YTDev_GoogleAuthenticator_Model_Customer</customer>
+                </rewrite>
+            </customer>
+
+            <admin>
+                <rewrite>
+                    <user>YTDev_GoogleAuthenticator_Model_Admin_User</user>
+                </rewrite>
+            </admin>
+        </models>
+
+        <resources>
+            <google_oauth_setup>
+                <setup>
+                    <module>YTDev_GoogleAuthenticator</module>
+                </setup>
+            </google_oauth_setup>
+        </resources>
+
+        <helpers>
+            <google_oauth>
+                <class>YTDev_GoogleAuthenticator_Helper</class>
+            </google_oauth>
+        </helpers>
+
+        <events>
+            <controller_action_postdispatch>
+                <observers>
+                    <google_oauth_request>
+                        <class>YTDev_GoogleAuthenticator_Controller_Router</class>
+                        <method>checkOauth</method>
+                    </google_oauth_request>
+                </observers>
+            </controller_action_postdispatch>
+
+            <controller_action_postdispatch_adminhtml>
+                <observers>
+                    <google_oauth_request_adminhtml>
+                        <class>YTDev_GoogleAuthenticator_Controller_Router</class>
+                        <method>checkOauth</method>
+                    </google_oauth_request_adminhtml>
+                </observers>
+            </controller_action_postdispatch_adminhtml>
+        </events>
+
+        <template>
+            <email>
+                <google_oauth_email_template translate="label" module="google_oauth">
+                    <label>Google Authenticator recovery mail template</label>
+                    <file>ytdev/google_oauth.html</file>
+                    <type>html</type>
+                </google_oauth_email_template>
+            </email>
+        </template>
+    </global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <YTDev_GoogleAuthenticator after="Mage_Adminhtml">YTDev_GoogleAuthenticator_Adminhtml</YTDev_GoogleAuthenticator>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <frontend>
+        <routers>
+            <google_oauth>
+                <use>standard</use>
+                <args>
+                    <module>YTDev_GoogleAuthenticator</module>
+                    <frontName>google_oauth</frontName>
+                </args>
+            </google_oauth>
+        </routers>
+
+        <layout>
+            <updates>
+                <google_oauth>
+                    <file>ytdev/google_oauth.xml</file>
+                </google_oauth>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <translations>
+                    <files>
+                        <default>YTDev_GoogleAuthenticator.csv</default>
+                    </files>
+                </translations>
+            </modules>
+        </translate>
+    </frontend>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <google_oauth>
+                    <file>ytdev/google_oauth.xml</file>
+                </google_oauth>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <translations>
+                    <files>
+                        <default>YTDev_GoogleAuthenticator.csv</default>
+                    </files>
+                </translations>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <default>
+        <ytdev_google_oauth>
+            <settings>
+                <enabled_admin>0</enabled_admin>
+                <enabled_customer>0</enabled_customer>
+                <code_name>My Site</code_name>
+                <secret_length>16</secret_length>
+                <email_template>google_oauth_email_template</email_template>
+            </settings>
+        </ytdev_google_oauth>
+    </default>
+
+    <crontab>
+        <jobs>
+            <google_oauth_check_recovery>
+                <schedule>
+                    <cron_expr>*/15 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>google_oauth/cron::checkRecovery</model>
+                </run>
+            </google_oauth_check_recovery>
+        </jobs>
+    </crontab>
+</config>

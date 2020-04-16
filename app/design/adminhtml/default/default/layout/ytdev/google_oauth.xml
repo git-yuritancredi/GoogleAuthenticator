@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_system_account_index>
+        <reference name="content">
+            <block type="google_oauth/adminhtml_test" template="ytdev/test.phtml"/>
+        </reference>
+    </adminhtml_system_account_index>
+
+    <adminhtml_google_oauth_authenticate>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="adminhtml/template" name="content" template="ytdev/authenticate.phtml">
+                <block type="core/text_list" name="form.additional.info" />
+            </block>
+        </block>
+    </adminhtml_google_oauth_authenticate>
+</layout>

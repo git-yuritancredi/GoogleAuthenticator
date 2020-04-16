@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <YTDev_GoogleAuthenticator>
+            <active>true</active>
+            <codePool>community</codePool>
+        </YTDev_GoogleAuthenticator>
+    </modules>
+</config>
