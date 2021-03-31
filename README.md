@@ -1,4 +1,7 @@
-## :lock: Two Factor Authenticator Module for Magento 1.9.x
+# :lock: Two Factor Authenticator Module for Magento 1.9.x
+### :warning: Alert
+#### This repository is no longer mantained
+---
 With this module you can enable two factor authenticator for admin and customer separately.
 
 ### For Admin:
